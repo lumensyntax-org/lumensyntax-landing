@@ -1,0 +1,16 @@
+---
+import { site } from '../content/site.ts';
+---
+<section id="properties">
+  <h2>The Five Properties</h2>
+  <ol>
+    {site.properties.map((prop) => (
+      <li>
+        <h3>{prop.name}</h3>
+        <p>{prop.statement}</p>
+        <p class="illustration">{prop.illustration}</p>
+      </li>
+    ))}
+  </ol>
+  <p class="operational-test"><strong>The operational test:</strong> Will the response produce fact-shaped fiction?</p>
+</section>

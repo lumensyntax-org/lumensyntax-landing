@@ -1,0 +1,16 @@
+# LumenSyntax
+
+Research project on epistemological fidelity in language models.
+
+## Papers
+- The Instrument Trap (v3): https://doi.org/10.5281/zenodo.18644321 (CC BY 4.0)
+- The Epistemic Equator: https://doi.org/10.5281/zenodo.20056444 (CC BY 4.0)
+
+## Open artifacts
+- Models (HuggingFace): https://huggingface.co/LumenSyntax
+- Ecclesia taxonomy (434 entries, CC BY-SA 4.0): https://github.com/lumensyntax-org/ecclesia
+- Benchmark (14,950 cases, code): https://github.com/lumensyntax-org/instrument-trap-benchmark
+- Benchmark dataset (CC BY 4.0, gated): https://huggingface.co/datasets/LumenSyntax/instrument-trap-benchmark
+
+## Note
+The benchmark dataset on HuggingFace is access-gated (free account + manual approval). Papers and code are open.

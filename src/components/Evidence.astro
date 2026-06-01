@@ -1,0 +1,35 @@
+---
+import { site } from '../content/site.ts';
+---
+<section id="evidence">
+  <h2>Cross-Family Evidence</h2>
+  <p>
+    The epistemological fine-tune replicates across publicly-reproducible families —
+    {site.publicFamilies.join(' · ')}, spanning 2B to 27B parameters — reaching
+    {site.publicFamiliesMetric}.
+    Adapters are on <a href={site.models.hfOrgUrl}>HuggingFace</a>
+    ({site.models.countIsSoft ? 'currently ' : ''}{site.models.count} model repos across
+    {site.models.families.join(', ')}). {site.models.note}
+  </p>
+
+  <p class="scale-floor">
+    <strong>The scale floor — {site.scaleFloor.family}:</strong>
+    {site.scaleFloor.rate}. {site.scaleFloor.note}
+  </p>
+
+  <p class="exception">
+    <strong>The documented exception — {site.exception.family}:</strong>
+    {site.exception.rate}. {site.exception.reason}
+  </p>
+
+  <h3>Reported metrics</h3>
+  <ul class="metrics">
+    {site.selfMetrics.map((m) => (
+      <li>
+        <strong>{m.label}:</strong> {m.value}
+        <span class="method"> ({m.method})</span>
+        {m.caveat && <p class="caveat">{m.caveat}</p>}
+      </li>
+    ))}
+  </ul>
+</section>

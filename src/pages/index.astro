@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Properties from '../components/Properties.astro';
+import Evidence from '../components/Evidence.astro';
+import Ecclesia from '../components/Ecclesia.astro';
+import Availability from '../components/Availability.astro';
+import { site } from '../content/site.ts';
+---
+<Base title={`LumenSyntax — ${site.paper1.title}`} description="LumenSyntax research: epistemological fidelity in language models. Two preprints, open models, the Ecclesia taxonomy, and an adversarial benchmark.">
+  <main>
+    <Header />
+    <Properties />
+    <Evidence />
+    <Ecclesia />
+    <Availability />
+    <footer>
+      <p>LumenSyntax · {site.paper1.authors} · {site.paper1.license}</p>
+    </footer>
+  </main>
+</Base>

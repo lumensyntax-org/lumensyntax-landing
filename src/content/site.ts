@@ -1,0 +1,111 @@
+import type { SiteContent } from './site.types';
+
+export const site: SiteContent = {
+  paper1: {
+    title: 'The Instrument Trap: Why Identity-as-Authority Breaks AI Safety Systems',
+    headline: 'The Instrument Trap',
+    subtitle: 'Why Identity-as-Authority Breaks AI Safety Systems',
+    authors: 'Rafael Rodríguez',
+    versionDOI: '10.5281/zenodo.19634358',
+    conceptDOI: '10.5281/zenodo.18644321',
+    license: 'CC BY 4.0',
+    status: 'Preprint · peer review in preparation',
+    date: '2026-04-17',
+    primaryLink: 'concept',
+  },
+  paper2: {
+    title: 'The Epistemic Equator: A Vanilla-Model Boundary in Activation Space, Cross-Family and Cross-Domain',
+    headline: 'The Epistemic Equator',
+    subtitle: 'A Vanilla-Model Boundary in Activation Space, Cross-Family and Cross-Domain',
+    authors: 'Rafael Rodríguez',
+    versionDOI: '10.5281/zenodo.20056444',
+    license: 'CC BY 4.0',
+    status: 'Preprint',
+    date: '2026-05-06',
+    primaryLink: 'version',
+    framing: 'A vanilla-model epistemic boundary detectable by a topic-balanced linear probe at cross-validated AUC ≈ 1.0 across model families and domains.',
+  },
+  properties: [
+    { name: 'Alignment', statement: 'Stated purpose and actual action are consistent.', illustration: 'A protein that claims to transport oxygen does transport oxygen.' },
+    { name: 'Proportion', statement: 'Action does not exceed what the purpose requires.', illustration: 'A medicine dosed to the disease, not the patient.' },
+    { name: 'Honesty', statement: 'What is claimed matches what is known.', illustration: 'The boundary between certainty and speculation is visible, not hidden behind fluency.' },
+    { name: 'Humility', statement: 'Authority is exercised only within legitimate scope.', illustration: 'A detector classifies what it was built to detect; beyond that, it is silent.' },
+    { name: 'Non-fabrication', statement: 'What does not exist is not invented to fill silence.', illustration: 'Absence is reported as absence; uncertainty is named, not sculpted into fact-shaped fiction.' },
+  ],
+  models: {
+    hfOrgUrl: 'https://huggingface.co/LumenSyntax',
+    families: ['Gemma 2', 'Gemma 3', 'StableLM 2', 'Nemotron'],
+    count: 9,
+    countIsSoft: true,
+    note: 'LoRA adapters and GGUF quantizations; no Llama, Mistral, or Qwen models are published.',
+  },
+  publicFamilies: ['Gemma (2B/9B/27B)', 'Nemotron 4B'],
+  // HONEST METRIC LABEL: these are *behavioral* pass rates (overall benchmark pass), NOT
+  // non-fabrication rates. The families that clear 92% NON-FABRICATION (Llama 96.3%, Mistral 93.7%)
+  // are omitted from the public headline because their adapters are not published. Relabeling
+  // behavioral as non-fabrication would be the inflation pattern this project exists to refuse.
+  publicFamiliesMetric: 'behavioral pass rates of 95.7%–98.7% (N≈300 per configuration; evaluation method varies by config — manual review, semantic eval, or pre-stratification)',
+  scaleFloor: {
+    family: 'StableLM 1.6B',
+    rate: '60.0% (generation mode; 57.7% raw)',
+    note: 'the smallest configuration tested; non-fabrication does not hold at this scale, and its failures include genuine safety failures — reported as the floor of the range, not a success.',
+  },
+  exception: {
+    family: 'Qwen 2.5',
+    rate: '92.7% only after manual reclassification (raw 90.0%; manual review 2026-03-16)',
+    reason: 'the RLHF ceiling — the fine-tune is learned in representation but the aligned decoder suppresses it in generation, and identity fabrication persists.',
+  },
+  ecclesia: {
+    entries: 434,
+    thematicDomains: 18,
+    buildersProfiles: 17,
+    repoUrl: 'https://github.com/lumensyntax-org/ecclesia',
+    license: 'CC BY-SA 4.0',
+    showBreakdown: false,
+  },
+  benchmark: {
+    cases: 14950,
+    categories: 8,
+    repoUrl: 'https://github.com/lumensyntax-org/instrument-trap-benchmark',
+    datasetUrl: 'https://huggingface.co/datasets/LumenSyntax/instrument-trap-benchmark',
+    dataLicense: 'CC BY 4.0',
+    codeLicense: null,
+    gated: true,
+  },
+  probe: {
+    name: 'epistemic-probe-topic-balanced',
+    examples: 200,
+    domains: 10,
+    balance: '100 licit / 100 illicit',
+    license: 'CC BY 4.0',
+    gated: false,
+    companionTo: 'paper2',
+    url: 'https://huggingface.co/datasets/LumenSyntax/epistemic-probe-topic-balanced',
+  },
+  selfMetrics: [
+    {
+      label: 'Non-fabrication, cross-family',
+      value: 'Llama-8B 96.3% and Mistral-7B 93.7% exceed 92% on the raw evaluator (N=300).',
+      method: 'raw automated semantic evaluation, N=300',
+      caveat: 'Of nine fine-tuned configurations, rates span 60%–98.7% across mixed evaluation methods. Qwen-7B reaches 92.7% only after manual reclassification (raw 90.0%; manual review 2026-03-16) and still carries documented identity fabrication.',
+    },
+    {
+      label: 'Sensitive-domain boundary',
+      value: 'On an 80-prompt medical/financial/legal/safety boundary test, the fine-tuned Gemma-2-9B model produced zero fabricating responses (0/80).',
+      method: 'single model (Gemma-2-9B, adapter logos17), N=80, 2026-03-07',
+    },
+  ],
+  gatedNote: 'The papers (Zenodo) and the benchmark code are openly accessible — no account required. The benchmark dataset on HuggingFace is gated: a free account, accepting the dataset conditions, and manual approval are required to download its files.',
+  held: ['gradient selectivity', 'Nothing is gated', '100% Open Source'],
+  links: [
+    'https://doi.org/10.5281/zenodo.19634358',
+    'https://doi.org/10.5281/zenodo.18644321',
+    'https://doi.org/10.5281/zenodo.20056444',
+    'https://github.com/lumensyntax-org/ecclesia',
+    'https://huggingface.co/LumenSyntax',
+    'https://github.com/lumensyntax-org',
+    'https://github.com/lumensyntax-org/instrument-trap-benchmark',
+    'https://huggingface.co/datasets/LumenSyntax/instrument-trap-benchmark',
+    'https://huggingface.co/datasets/LumenSyntax/epistemic-probe-topic-balanced',
+  ],
+};

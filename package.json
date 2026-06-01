@@ -1,0 +1,21 @@
+{
+  "name": "lumensyntax-landing",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "check:content": "node --experimental-strip-types scripts/check-content.mjs",
+    "build": "npm run check:content && astro build",
+    "postbuild": "node --experimental-strip-types scripts/check-content.mjs --verify-html",
+    "preview": "astro preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "astro": "^5.0.0",
+    "@astrojs/sitemap": "^3.2.0"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.0"
+  }
+}

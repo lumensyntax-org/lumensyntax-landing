@@ -1,0 +1,32 @@
+---
+import { site } from '../content/site.ts';
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+const p1 = site.paper1;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+
+    <!-- Highwire citation meta (scholarly crawlers) -->
+    <meta name="citation_title" content={p1.title} />
+    <meta name="citation_author" content={p1.authors} />
+    <meta name="citation_doi" content={p1.versionDOI} />
+    <meta name="citation_publication_date" content={p1.date} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
