@@ -1,0 +1,37 @@
+---
+import { site } from '../content/site.ts';
+import { t, type Lang } from '../content/i18n.ts';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const r = site.lab.rules;
+---
+<section id="rules" class="register-fact">
+  <span class="label label-fact">04 · {t(site.lab.labels.executionRules, lang)}</span>
+  <h2>{t(site.lab.labels.executionRules, lang)}</h2>
+
+  <h3>{t(r.classificationsHeading, lang)}</h3>
+  <dl class="classes">
+    {r.classifications.map((c) => (
+      <div class="cls">
+        <dt>{c.name} <span class="action">→ {c.action}</span></dt>
+        <dd>{t(c.meaning, lang)}</dd>
+      </div>
+    ))}
+  </dl>
+
+  <h3>{t(r.movesHeading, lang)}</h3>
+  <ol class="moves">
+    {r.moves.map((m) => (
+      <li><strong>{t(m.name, lang)}.</strong> {t(m.statement, lang)}</li>
+    ))}
+  </ol>
+</section>
+<style>
+  .classes { margin: 0; }
+  .cls { margin-bottom: 12px; }
+  .cls dt { font-family: var(--serif); }
+  .cls dd { margin: 2px 0 0; color: var(--text-dim); }
+  .action { color: var(--ecuador); font-size: 13px; letter-spacing: 1px; }
+  .moves { color: var(--text-dim); }
+  .moves li { margin-bottom: 8px; }
+</style>

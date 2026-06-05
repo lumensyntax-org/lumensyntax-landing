@@ -1,0 +1,57 @@
+---
+import { site } from '../content/site.ts';
+import { t, type Lang } from '../content/i18n.ts';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const e = site.ecclesia;
+const b = site.benchmark;
+const ui = site.lab.ui;
+const fill = (s: string, map: Record<string, string>) =>
+  s.replace(/\{(\w+)\}/g, (_, k) => map[k] ?? `{${k}}`);
+const ecclesiaText = fill(t(ui.ecclesiaBody, lang), {
+  entries: String(e.entries), domains: String(e.thematicDomains), builders: String(e.buildersProfiles),
+});
+const benchmarkText = fill(t(ui.benchmarkBody, lang), {
+  cases: b.cases.toLocaleString(), categories: String(b.categories), families: site.models.families.join(', '),
+});
+const crossFamilyText = fill(t(ui.crossFamilyLead, lang), {
+  families: site.publicFamilies.join(' · '), metric: site.publicFamiliesMetric,
+});
+---
+<section id="research" class="register-fact">
+  <span class="label label-fact">02 · {t(site.lab.labels.research, lang)} · {t(site.lab.labels.verifiedFact, lang)}</span>
+  <h2>{t(site.lab.labels.research, lang)}</h2>
+
+  <h3>{t(ui.publications, lang)}</h3>
+  <ul>
+    <li><a href={`https://doi.org/${site.paper1.conceptDOI ?? site.paper1.versionDOI}`}>{site.paper1.title}</a> — {site.paper1.license}</li>
+    <li><a href={`https://doi.org/${site.paper2.versionDOI}`}>{site.paper2.title}</a> — {site.paper2.license}</li>
+  </ul>
+
+  <h3>{t(ui.ecclesiaHeading, lang)}</h3>
+  <p>{ecclesiaText} {e.license} · <a href={e.repoUrl}>{e.repoUrl.replace('https://', '')}</a></p>
+
+  <h3>{t(ui.benchmarkHeading, lang)}</h3>
+  <p>
+    {benchmarkText}
+    <a href={b.repoUrl}>code</a>, <a href={b.datasetUrl}>dataset ({b.dataLicense}{b.gated ? ', gated' : ''})</a> ·
+    <a href={site.models.hfOrgUrl}>{site.models.countIsSoft ? 'currently ' : ''}{site.models.count} repos</a>. {site.models.note}
+  </p>
+
+  <h3>{t(ui.crossFamilyHeading, lang)}</h3>
+  <p>{crossFamilyText}</p>
+  <p>
+    <strong>{t(ui.scaleFloorLabel, lang)} — {site.scaleFloor.family}:</strong> {site.scaleFloor.rate}. {t(site.scaleFloor.note, lang)}
+  </p>
+  <p>
+    <strong>{t(ui.exceptionLabel, lang)} — {site.exception.family}:</strong> {site.exception.rate}. {t(site.exception.reason, lang)}
+  </p>
+  <ul class="metrics">
+    {site.selfMetrics.map((m) => (
+      <li>
+        <strong>{t(m.label, lang)}:</strong> {t(m.value, lang)} <span class="method">({t(m.method, lang)})</span>
+        {m.caveat && <span class="caveat"> {t(m.caveat, lang)}</span>}
+      </li>
+    ))}
+  </ul>
+</section>

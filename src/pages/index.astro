@@ -1,21 +1,26 @@
 ---
 import Base from '../layouts/Base.astro';
-import Header from '../components/Header.astro';
-import Properties from '../components/Properties.astro';
-import Evidence from '../components/Evidence.astro';
-import Ecclesia from '../components/Ecclesia.astro';
-import Availability from '../components/Availability.astro';
+import LabHeader from '../components/LabHeader.astro';
+import Intro from '../components/Intro.astro';
+import Research from '../components/Research.astro';
+import Approach from '../components/Approach.astro';
+import ExecutionRules from '../components/ExecutionRules.astro';
+import Position from '../components/Position.astro';
+import Footer from '../components/Footer.astro';
 import { site } from '../content/site.ts';
+const lang = 'en';
+const pos = site.lab.positions;
 ---
-<Base title={`LumenSyntax — ${site.paper1.title}`} description="LumenSyntax research: epistemological fidelity in language models. Two preprints, open models, the Ecclesia taxonomy, and an adversarial benchmark.">
+<Base lang={lang} title={`LumenSyntax — ${site.lab.name}`} description="LumenSyntax: a research lab on epistemological fidelity in language models. Open preprints, the Ecclesia taxonomy, an adversarial benchmark, and the lab's reading of epistemic safety.">
   <main>
-    <Header />
-    <Properties />
-    <Evidence />
-    <Ecclesia />
-    <Availability />
-    <footer>
-      <p>LumenSyntax · {site.paper1.authors} · {site.paper1.license}</p>
-    </footer>
+    <LabHeader lang={lang} />
+    <Intro lang={lang} />
+    <Research lang={lang} />
+    <Approach lang={lang} />
+    <ExecutionRules lang={lang} />
+    <Position num="05" heading={pos.structureRationale.heading} body={pos.structureRationale.body} lang={lang} />
+    <Position num="06" heading={pos.futureOfEpistemicSafety.heading} body={pos.futureOfEpistemicSafety.body} lang={lang} />
+    <Position num="07" heading={pos.whyItMatters.heading} body={pos.whyItMatters.body} lang={lang} />
+    <Footer lang={lang} />
   </main>
 </Base>

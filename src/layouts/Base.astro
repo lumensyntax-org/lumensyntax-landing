@@ -1,26 +1,27 @@
 ---
+import '../styles/tokens.css';
 import { site } from '../content/site.ts';
-interface Props { title: string; description: string; }
-const { title, description } = Astro.props;
+import { type Lang } from '../content/i18n.ts';
+interface Props { title: string; description: string; lang: Lang }
+const { title, description, lang } = Astro.props;
 const p1 = site.paper1;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-
-    <!-- Open Graph -->
+    <link rel="alternate" hreflang="en" href={new URL('/', Astro.site).href} />
+    <link rel="alternate" hreflang="es" href={new URL('/es/', Astro.site).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site).href} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-
-    <!-- Highwire citation meta (scholarly crawlers) -->
     <meta name="citation_title" content={p1.title} />
     <meta name="citation_author" content={p1.authors} />
     <meta name="citation_doi" content={p1.versionDOI} />

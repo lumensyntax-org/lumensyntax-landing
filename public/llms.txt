@@ -2,6 +2,15 @@
 
 Research project on epistemological fidelity in language models.
 
+## Languages
+- English: https://lumensyntax.com/
+- Español: https://lumensyntax.com/es/
+
+## What this is
+LumenSyntax is a research lab on epistemological fidelity in language models. The site presents
+verified research (papers, Ecclesia, benchmark, models) and, in a separately-marked register,
+the lab's argued positions on the future of epistemic safety.
+
 ## Papers
 - The Instrument Trap (v3): https://doi.org/10.5281/zenodo.18644321 (CC BY 4.0)
 - The Epistemic Equator: https://doi.org/10.5281/zenodo.20056444 (CC BY 4.0)

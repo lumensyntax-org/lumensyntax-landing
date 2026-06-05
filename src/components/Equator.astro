@@ -1,0 +1,20 @@
+---
+// The epistemic-equator line. `hero` = the strong gradient under the header;
+// otherwise a subtle separator. Pure CSS, no JS.
+interface Props { hero?: boolean }
+const { hero = false } = Astro.props;
+---
+<div class={hero ? 'equator equator-hero' : 'equator'} aria-hidden="true"></div>
+<style>
+  .equator {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--ecuador), transparent);
+    opacity: 0.4;
+    margin: 8px 0;
+  }
+  .equator-hero {
+    opacity: 1;
+    box-shadow: 0 0 16px var(--ecuador-glow);
+    margin: 28px 0;
+  }
+</style>

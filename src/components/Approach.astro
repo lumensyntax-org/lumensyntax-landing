@@ -1,0 +1,26 @@
+---
+import { site } from '../content/site.ts';
+import { t, type Lang } from '../content/i18n.ts';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+<section id="approach" class="register-fact">
+  <span class="label label-fact">03 · {t(site.lab.labels.approach, lang)}</span>
+  <h2>{t(site.lab.labels.approach, lang)}</h2>
+  <ol class="properties">
+    {site.properties.map((p) => (
+      <li>
+        <h3>{p.name}</h3>
+        <p>{t(p.statement, lang)}</p>
+        <p class="illustration">{t(p.illustration, lang)}</p>
+      </li>
+    ))}
+  </ol>
+  <p class="operational-test"><strong>{t(site.lab.ui.operationalTestLabel, lang)}</strong> {t(site.lab.ui.operationalTest, lang)}</p>
+</section>
+<style>
+  .properties { list-style: none; padding: 0; }
+  .properties li { margin-bottom: 22px; }
+  .illustration { color: var(--text-faint); font-style: italic; }
+  .operational-test { color: var(--ecuador); }
+</style>

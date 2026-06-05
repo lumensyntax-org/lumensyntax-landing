@@ -1,0 +1,22 @@
+---
+import { LANGS, type Lang } from '../content/i18n.ts';
+interface Props { current: Lang }
+const { current } = Astro.props;
+// EN lives at "/", ES at "/es/". A plain link — no JS.
+const href = (l: Lang) => (l === 'en' ? '/' : '/es/');
+---
+<nav class="langtoggle" aria-label="Language">
+  {LANGS.map((l, i) => (
+    <>
+      {i > 0 && <span class="sep">·</span>}
+      <a href={href(l)} aria-current={l === current ? 'true' : undefined}
+         class={l === current ? 'active' : ''}>{l.toUpperCase()}</a>
+    </>
+  ))}
+</nav>
+<style>
+  .langtoggle { font-size: 12px; letter-spacing: 1px; color: var(--text-faint); }
+  .langtoggle a { color: var(--text-faint); }
+  .langtoggle a.active { color: var(--text); }
+  .sep { margin: 0 6px; opacity: 0.5; }
+</style>

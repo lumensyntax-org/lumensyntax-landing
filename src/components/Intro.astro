@@ -1,0 +1,12 @@
+---
+import { site } from '../content/site.ts';
+import { t, type Lang } from '../content/i18n.ts';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+<section id="intro">
+  <p class="intro-text">{t(site.lab.intro, lang)}</p>
+</section>
+<style>
+  .intro-text { font-size: 20px; color: var(--text); max-width: 640px; }
+</style>

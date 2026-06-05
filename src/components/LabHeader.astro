@@ -1,0 +1,23 @@
+---
+import { site } from '../content/site.ts';
+import { t, type Lang } from '../content/i18n.ts';
+import LangToggle from './LangToggle.astro';
+import Equator from './Equator.astro';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+<header class="labheader">
+  <div class="topbar">
+    <span class="eyebrow">LUMENSYNTAX</span>
+    <LangToggle current={lang} />
+  </div>
+  <h1>{site.lab.name}</h1>
+  <p class="tagline">{t(site.lab.tagline, lang)}</p>
+  <Equator hero={true} />
+</header>
+<style>
+  .topbar { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; }
+  .eyebrow { font-size: 11px; letter-spacing: 3px; color: var(--text-faint); }
+  .labheader h1 { font-size: clamp(40px, 8vw, 68px); margin: 24px 0 8px; }
+  .tagline { color: var(--text-dim); font-style: italic; font-size: 18px; margin: 0; }
+</style>

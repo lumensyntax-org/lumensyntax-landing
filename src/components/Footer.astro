@@ -1,0 +1,23 @@
+---
+import { site } from '../content/site.ts';
+import { t, type Lang } from '../content/i18n.ts';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+<footer id="availability">
+  <span class="label">08 · {t(site.lab.labels.availability, lang)}</span>
+  <p class="gated">{t(site.gatedNote, lang)}</p>
+  <p class="links">
+    <a href={`https://doi.org/${site.paper1.conceptDOI ?? site.paper1.versionDOI}`}>{site.paper1.license} · The Instrument Trap</a> ·
+    <a href={`https://doi.org/${site.paper2.versionDOI}`}>{site.paper2.license} · The Epistemic Equator</a> ·
+    <a href={site.ecclesia.repoUrl}>Ecclesia</a> ·
+    <a href={site.models.hfOrgUrl}>HuggingFace</a>
+  </p>
+  <p class="colophon">LumenSyntax · {site.paper1.authors} · {site.paper1.license}</p>
+</footer>
+<style>
+  footer { padding: 48px 0; border-top: 1px solid var(--rule); }
+  .gated { color: var(--text-dim); font-size: 15px; }
+  .links { font-size: 14px; }
+  .colophon { color: var(--text-faint); font-size: 13px; margin-top: 24px; }
+</style>

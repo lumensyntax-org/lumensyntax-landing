@@ -1,0 +1,43 @@
+:root {
+  /* Ecuador dark theme */
+  --bg: #0a0a0f;
+  --bg-raised: #14161f;
+  --bg-amber: #100f0a;        /* position sections, slightly warm */
+  --text: #dfe3ee;
+  --text-dim: #c6ccdc;
+  --text-faint: #8189a0;
+  --rule: #1c2030;            /* subtle separators */
+
+  --ecuador: #7da0c4;         /* the line + verified-fact accent */
+  --ecuador-glow: #5f86b0;
+  --amber: #c9a84a;           /* lab-position accent */
+
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --maxw: 760px;
+  --pad: clamp(20px, 5vw, 40px);
+}
+
+* { box-sizing: border-box; }
+html { color-scheme: dark; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.6;
+  font-size: 17px;
+}
+main { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.2; }
+a { color: var(--ecuador); text-decoration: none; }
+a:hover { text-decoration: underline; }
+section { padding: 48px 0; border-top: 1px solid var(--rule); }
+
+/* Register accents */
+.register-fact { border-left: 3px solid var(--ecuador); padding-left: 18px; }
+.register-position { border-left: 3px solid var(--amber); padding-left: 18px; background: var(--bg-amber); }
+.label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-faint); }
+.label-fact { color: var(--ecuador); }
+.label-position { color: var(--amber); }

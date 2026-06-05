@@ -1,0 +1,20 @@
+---
+import { site } from '../content/site.ts';
+import { t, type Lang, type L10n } from '../content/i18n.ts';
+import Equator from './Equator.astro';
+interface Props { num: string; heading: L10n; body: L10n; lang: Lang }
+const { num, heading, body, lang } = Astro.props;
+// Render *italic* markers (paper titles) without a markdown dep: split on * pairs.
+const parts = t(body, lang).split('*');
+---
+<section class="register-position">
+  <span class="label label-position">{num} · {t(site.lab.labels.labsReading, lang)}</span>
+  <h2>{t(heading, lang)}</h2>
+  <p class="position-body">
+    {parts.map((seg, i) => (i % 2 === 1 ? <em>{seg}</em> : <Fragment>{seg}</Fragment>))}
+  </p>
+  <Equator />
+</section>
+<style>
+  .position-body { color: var(--text-dim); }
+</style>
