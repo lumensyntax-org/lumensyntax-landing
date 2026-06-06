@@ -59,10 +59,15 @@ export function evaluateLinkResults(results) {
 }
 
 async function fetchOnce(url) {
+  // For doi.org we only verify the DOI RESOLVES (the 30x redirect), not that the
+  // destination (zenodo.org) loads fast — zenodo can take ~19s to follow, which
+  // is irrelevant to whether the DOI is valid and was timing out the build.
+  // `redirect: manual` returns the 30x immediately; a 30x is a valid DOI.
+  const isDoi = url.includes('doi.org/');
   const opts = {
-    redirect: 'follow',
+    redirect: isDoi ? 'manual' : 'follow',
     headers: { 'User-Agent': 'lumensyntax-landing-content-gate' },
-    signal: AbortSignal.timeout(30000),  // doi.org can take ~18s under load; 15s was too short
+    signal: AbortSignal.timeout(30000),
   };
   try {
     let res = await fetch(url, { ...opts, method: 'HEAD' });
