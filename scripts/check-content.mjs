@@ -62,7 +62,7 @@ async function fetchOnce(url) {
   const opts = {
     redirect: 'follow',
     headers: { 'User-Agent': 'lumensyntax-landing-content-gate' },
-    signal: AbortSignal.timeout(15000),
+    signal: AbortSignal.timeout(30000),  // doi.org can take ~18s under load; 15s was too short
   };
   try {
     let res = await fetch(url, { ...opts, method: 'HEAD' });
@@ -76,12 +76,17 @@ async function fetchOnce(url) {
   }
 }
 
-// One retry on a status-0 (transient timeout/network). A persistently-down link
-// still returns 0 twice and fails the gate; a slow-first-byte host gets a second
-// chance, so the gate doesn't cry wolf on a healthy link under concurrent load.
+// Retry on transient failures: status 0 (timeout/network) AND 5xx (transient
+// server errors, e.g. GitHub 502/503/504 under load). A genuinely broken link
+// (404, etc.) still fails the gate; only transient conditions get a second
+// attempt, with a short backoff so a slow host has time to recover.
+const isTransient = (s) => s === 0 || (s >= 500 && s < 600);
 async function fetchStatus(url) {
   let status = await fetchOnce(url);
-  if (status === 0) status = await fetchOnce(url);
+  if (isTransient(status)) {
+    await new Promise((r) => setTimeout(r, 2000));
+    status = await fetchOnce(url);
+  }
   return { url, status };
 }
 

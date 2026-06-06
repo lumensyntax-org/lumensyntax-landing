@@ -25,7 +25,7 @@ const crossFamilyText = fill(t(ui.crossFamilyLead, lang), {
   <h3>{t(ui.publications, lang)}</h3>
   <ul>
     <li><a href={`https://doi.org/${site.paper1.conceptDOI ?? site.paper1.versionDOI}`}>{site.paper1.title}</a> — {site.paper1.license}</li>
-    <li><a href={`https://doi.org/${site.paper2.versionDOI}`}>{site.paper2.title}</a> — {site.paper2.license}</li>
+    <li><a href={`https://doi.org/${site.paper2.conceptDOI ?? site.paper2.versionDOI}`}>{site.paper2.title}</a> — {site.paper2.license}</li>
   </ul>
 
   <h3>{t(ui.ecclesiaHeading, lang)}</h3>
