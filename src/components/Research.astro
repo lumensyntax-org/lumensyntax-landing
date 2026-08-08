@@ -33,8 +33,10 @@ const crossFamilyText = fill(t(ui.crossFamilyLead, lang), {
 
   <h3>{t(ui.benchmarkHeading, lang)}</h3>
   <p>
-    {benchmarkText}
-    <a href={b.repoUrl}>code</a>, <a href={b.datasetUrl}>dataset ({b.dataLicense}{b.gated ? ', gated' : ''})</a> ·
+    {/* Espacios explícitos: desde Astro 6 el whitespace suelto junto a un elemento
+        inline se recorta, y el salto de línea dejaba «Nemotron:code» y «·currently». */}
+    {benchmarkText}{' '}
+    <a href={b.repoUrl}>code</a>, <a href={b.datasetUrl}>dataset ({b.dataLicense}{b.gated ? ', gated' : ''})</a>{' · '}
     <a href={site.models.hfOrgUrl}>{site.models.countIsSoft ? 'currently ' : ''}{site.models.count} repos</a>. {site.models.note}
   </p>
 
