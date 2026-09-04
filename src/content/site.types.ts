@@ -49,6 +49,7 @@ export interface SiteContent {
     thematicDomains: number;
     buildersProfiles: number;
     repoUrl: string;
+    siteUrl: string;
     license: string;
     showBreakdown: boolean;   // false unless regenerated-from-repo and asserted to sum to `entries`
   };
