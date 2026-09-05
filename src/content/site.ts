@@ -79,7 +79,7 @@ export const site: SiteContent = {
               es: 'el techo RLHF — el ajuste se aprende en la representación pero el decodificador alineado lo suprime en la generación, y la fabricación de identidad persiste.' },
   },
   ecclesia: {
-    entries: 434,
+    entries: 437,
     thematicDomains: 18,
     buildersProfiles: 17,
     repoUrl: 'https://github.com/lumensyntax-org/ecclesia',
