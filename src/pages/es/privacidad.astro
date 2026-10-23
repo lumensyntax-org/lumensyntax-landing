@@ -1,0 +1,11 @@
+---
+import Base from '../../layouts/Base.astro';
+import Privacy from '../../components/Privacy.astro';
+import { PRIVACY_PATH } from '../../content/i18n.ts';
+const lang = 'es';
+---
+<Base lang={lang} paths={PRIVACY_PATH} citation={false} title="Privacidad · LumenSyntax" description="Qué datos personales manejan lumensyntax.com, el catálogo Ecclesia y el dataset de benchmark con acceso restringido.">
+  <main>
+    <Privacy lang={lang} />
+  </main>
+</Base>

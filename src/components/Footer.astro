@@ -1,6 +1,6 @@
 ---
 import { site } from '../content/site.ts';
-import { t, type Lang } from '../content/i18n.ts';
+import { t, PRIVACY_PATH, type Lang } from '../content/i18n.ts';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 ---
@@ -13,7 +13,8 @@ const { lang } = Astro.props;
     <a href={`https://doi.org/${site.paper1.conceptDOI ?? site.paper1.versionDOI}`}>{site.paper1.license} · The Instrument Trap</a>{' · '}
     <a href={`https://doi.org/${site.paper2.conceptDOI ?? site.paper2.versionDOI}`}>{site.paper2.license} · The Epistemic Equator</a>{' · '}
     <a href={site.ecclesia.siteUrl}>Ecclesia</a>{' · '}
-    <a href={site.models.hfOrgUrl}>HuggingFace</a>
+    <a href={site.models.hfOrgUrl}>HuggingFace</a>{' · '}
+    <a href={PRIVACY_PATH[lang]}>{t(site.privacy.title, lang)}</a>
   </p>
   <p class="colophon">LumenSyntax · {site.paper1.authors} · {site.paper1.license}</p>
 </footer>

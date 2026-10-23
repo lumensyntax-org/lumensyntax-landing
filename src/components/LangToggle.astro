@@ -1,9 +1,9 @@
 ---
-import { LANGS, type Lang } from '../content/i18n.ts';
-interface Props { current: Lang }
-const { current } = Astro.props;
-// EN lives at "/", ES at "/es/". A plain link — no JS.
-const href = (l: Lang) => (l === 'en' ? '/' : '/es/');
+import { LANGS, HOME_PATH, type Lang } from '../content/i18n.ts';
+interface Props { current: Lang; paths?: Record<Lang, string> }
+const { current, paths = HOME_PATH } = Astro.props;
+// Each language links to the same page in that language (default: the home pages). A plain link — no JS.
+const href = (l: Lang) => paths[l];
 ---
 <nav class="langtoggle" aria-label="Language">
   {LANGS.map((l, i) => (

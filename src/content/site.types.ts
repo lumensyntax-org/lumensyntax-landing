@@ -75,6 +75,18 @@ export interface SiteContent {
   selfMetrics: SelfMetric[];
   /** availability honesty: what is open vs gated */
   gatedNote: L10n;
+  /** privacy notice at PRIVACY_PATH. Every sentence must match actual practice: a notice that does not is itself a false claim */
+  privacy: {
+    title: L10n;
+    updatedLabel: L10n;
+    /** ISO date of the last change to the practices or the text */
+    updated: string;
+    lead: L10n;
+    sections: { heading: L10n; body: L10n; link?: { label: L10n; url: string } }[];
+    contactLabel: L10n;
+    contact: string;
+    backLabel: L10n;
+  };
   /** claims kept in data but forbidden from rendering; gate fails if any string here appears in built HTML */
   held: string[];
   /** every external URL the gate must verify resolves */
