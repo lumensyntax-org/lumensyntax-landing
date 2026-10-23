@@ -1,0 +1,38 @@
+---
+import { site } from '../content/site.ts';
+import { t, HOME_PATH, PRIVACY_PATH, type Lang } from '../content/i18n.ts';
+import LangToggle from './LangToggle.astro';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const p = site.privacy;
+---
+<header class="privacy-header">
+  <div class="topbar">
+    <a class="eyebrow" href={HOME_PATH[lang]}>LUMENSYNTAX</a>
+    <LangToggle current={lang} paths={PRIVACY_PATH} />
+  </div>
+  <h1>{t(p.title, lang)}</h1>
+  <p class="updated">{t(p.updatedLabel, lang)}: <time datetime={p.updated}>{p.updated}</time></p>
+  <p class="lead">{t(p.lead, lang)}</p>
+</header>
+{p.sections.map((s) => (
+  <section>
+    <h2>{t(s.heading, lang)}</h2>
+    <p>{t(s.body, lang)}</p>
+    {s.link && <p class="more"><a href={s.link.url}>{t(s.link.label, lang)}</a></p>}
+  </section>
+))}
+<section>
+  <h2>{t(p.contactLabel, lang)}</h2>
+  <p><a href={`mailto:${p.contact}`}>{p.contact}</a></p>
+</section>
+<p class="back"><a href={HOME_PATH[lang]}>{t(p.backLabel, lang)}</a></p>
+<style>
+  .topbar { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; }
+  .eyebrow { font-size: 11px; letter-spacing: 3px; color: var(--text-faint); }
+  .privacy-header h1 { font-size: clamp(32px, 6vw, 48px); margin: 24px 0 8px; }
+  .updated { color: var(--text-faint); font-size: 14px; margin: 0 0 16px; }
+  .lead { color: var(--text-dim); }
+  .more { font-size: 15px; }
+  .back { padding: 32px 0 48px; border-top: 1px solid var(--rule); font-size: 15px; }
+</style>

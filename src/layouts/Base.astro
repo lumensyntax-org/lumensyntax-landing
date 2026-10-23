@@ -1,9 +1,10 @@
 ---
 import '../styles/tokens.css';
 import { site } from '../content/site.ts';
-import { type Lang } from '../content/i18n.ts';
-interface Props { title: string; description: string; lang: Lang }
-const { title, description, lang } = Astro.props;
+import { HOME_PATH, type Lang } from '../content/i18n.ts';
+// paths: this page's route per language (hreflang). citation: paper metadata, for the home pages only.
+interface Props { title: string; description: string; lang: Lang; paths?: Record<Lang, string>; citation?: boolean }
+const { title, description, lang, paths = HOME_PATH, citation = true } = Astro.props;
 const p1 = site.paper1;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
@@ -15,17 +16,21 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={new URL('/', Astro.site).href} />
-    <link rel="alternate" hreflang="es" href={new URL('/es/', Astro.site).href} />
-    <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site).href} />
+    <link rel="alternate" hreflang="en" href={new URL(paths.en, Astro.site).href} />
+    <link rel="alternate" hreflang="es" href={new URL(paths.es, Astro.site).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL(paths.en, Astro.site).href} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="citation_title" content={p1.title} />
-    <meta name="citation_author" content={p1.authors} />
-    <meta name="citation_doi" content={p1.versionDOI} />
-    <meta name="citation_publication_date" content={p1.date} />
+    {citation && (
+      <>
+        <meta name="citation_title" content={p1.title} />
+        <meta name="citation_author" content={p1.authors} />
+        <meta name="citation_doi" content={p1.versionDOI} />
+        <meta name="citation_publication_date" content={p1.date} />
+      </>
+    )}
   </head>
   <body>
     <slot />

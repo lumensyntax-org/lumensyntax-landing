@@ -2,6 +2,10 @@ export const LANGS = ['en', 'es'] as const;
 export type Lang = (typeof LANGS)[number];
 export const DEFAULT_LANG: Lang = 'en';
 
+/** Route of each page per language; the language toggle and hreflang links use these. */
+export const HOME_PATH: Record<Lang, string> = { en: '/', es: '/es/' };
+export const PRIVACY_PATH: Record<Lang, string> = { en: '/privacy/', es: '/es/privacidad/' };
+
 /** A localized string: distinct text per language. */
 export type L10n = { en: string; es: string };
 

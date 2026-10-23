@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import Privacy from '../components/Privacy.astro';
+import { PRIVACY_PATH } from '../content/i18n.ts';
+const lang = 'en';
+---
+<Base lang={lang} paths={PRIVACY_PATH} citation={false} title="Privacy · LumenSyntax" description="What personal data lumensyntax.com, the Ecclesia catalogue and the gated benchmark dataset handle.">
+  <main>
+    <Privacy lang={lang} />
+  </main>
+</Base>
